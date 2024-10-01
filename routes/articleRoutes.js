@@ -4,7 +4,6 @@ const router = express.Router();
 const articleModel = require("../models/articleModel");
 
 //Routes
-
 router.get("/articles", async (req, res) => {
   try {
     const articles = await articleModel.find();
@@ -20,7 +19,7 @@ router.post("/articles/new", async (req, res) => {
   try {
     const newArticle = req.body;
     await articleModel.create(newArticle);
-    res.status(200).json({ message: "All is good" });
+    res.status(200).json({ message: `All is good ${articleModel} has been created` });
   } catch (error) {
     res
       .status(500)
