@@ -3,7 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
+const cookieParser = require("cookie-parser")
 const articleRoutes = require("./routes/articleRoutes");
+const newUserRoutes = require("./routes/userRoutes");
 
 //Importation des variables d'environnement
 require("dotenv").config();
@@ -13,10 +15,11 @@ const MONGO_DB = process.env.DB_CONNECTION;
 //Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser())
 
 //Routes
 app.use(articleRoutes);
-
+app.use(newUserRoutes);
 //Connection to DB and Local server
 
 mongoose
