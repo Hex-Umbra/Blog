@@ -4,7 +4,7 @@ const router = express.Router();
 const articleModel = require("../models/articleModel");
 
 //Routes
-router.get("/articles", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const articles = await articleModel.find();
     res.status(200).json(articles);
@@ -15,7 +15,7 @@ router.get("/articles", async (req, res) => {
   }
 });
 
-router.post("/articles/new", async (req, res) => {
+router.post("/new", async (req, res) => {
   try {
     const newArticle = req.body;
     await articleModel.create(newArticle);
@@ -27,7 +27,7 @@ router.post("/articles/new", async (req, res) => {
   }
 });
 
-router.get("/articles/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const article = await articleModel.findById(id);
@@ -39,7 +39,7 @@ router.get("/articles/:id", async (req, res) => {
   }
 });
 
-router.put("/articles/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
         const {id} = req.params
         const modifiedArticle =await articleModel.findByIdAndUpdate(id, req.body);
@@ -50,7 +50,7 @@ router.put("/articles/:id", async (req, res) => {
       .json({ message: `Oops Looks like something went wrong :${error}` });
     }
 });
-router.delete("/articles/:id", async(req,res) => {
+router.delete("/:id", async(req,res) => {
     try {
         const {id} = req.params;
         const deletedArticle = await articleModel.findByIdAndDelete(id)
